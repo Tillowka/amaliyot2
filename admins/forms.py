@@ -15,12 +15,14 @@ class adminForm(forms.Form):
 class createProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name','info','price']
+        fields = ['image', 'name', 'info', 'price']
 
 class editProductForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
+
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['image', 'name', 'info', 'price']
 
 class CreateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=30)
