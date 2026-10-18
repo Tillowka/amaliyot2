@@ -13,9 +13,10 @@ class Product(models.Model):
 class ProductRequest(models.Model):
     
     user = models.ForeignKey(
-    UserProfile,
+    'UserProfile',
     on_delete=models.CASCADE,
     related_name='product_requests'
+    
 )
     ism = models.CharField(max_length=255)
     malumot = models.TextField(max_length=300)
