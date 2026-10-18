@@ -222,7 +222,7 @@ def rad_product(request, pk):
 
     admin = product.admin_data
     admincoment = "Hato malumot!"
-    tekshirgan = 
+    
     admin.save()
 
     return redirect('product_requests')
