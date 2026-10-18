@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5" style="margin-top: 140px; max-width: 760px;">
+    <h1 class="mb-4">Yangi mahsulot qo'shish</h1>
+
+    <form method="post" enctype="multipart/form-data" class="bg-light p-4 rounded">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Qo'shish</button>
+        <a href="{% url 'table_page' %}" class="btn btn-secondary ms-2">Orqaga</a>
+    </form>
+</div>
+{% endblock %}
