@@ -178,10 +178,8 @@ def boshliq_page(request):
 
 
 def edit_user(request, pk):
-    denied = _role_denied(request, 'boshliq', 'admin')
-    if denied:
-        return denied
-    profile = get_object_or_404(UserProfile, pk=pk)
+    
+    profile = UserProfile.objects.get(user__pk=pk)
     if request.method == 'POST':
         form = editUserForm(request.POST, instance=profile)
         if form.is_valid():
