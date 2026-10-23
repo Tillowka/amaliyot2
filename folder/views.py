@@ -190,13 +190,10 @@ def edit_user(request, pk):
     return render(request, 'boshliq/edit_user.html', {'form': form, 'profile': profile})
 
 
-@require_POST
 def delete_user(request, pk):
-    denied = _role_denied(request, 'boshliq', 'admin')
-    if denied:
-        return denied
-    profile = get_object_or_404(UserProfile, pk=pk)
-    profile.user.delete()
+    user = User.objects.get(pk=pk)
+    user.delete()
+
     return redirect('admins')
 
 
