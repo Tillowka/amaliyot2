@@ -55,16 +55,12 @@ def shop(request):
 
 
 def table_page(request):
-    denied = _role_denied(request, 'admin', 'boshliq')
-    if denied:
-        return denied
+  
     return render(request, 'admin/base_table.html', {'product': Product.objects.all()})
 
 
 def create_table(request):
-    denied = _role_denied(request, 'admin', 'boshliq')
-    if denied:
-        return denied
+ 
 
     if request.method == 'POST':
         form = createProductForm(request.POST, request.FILES)
@@ -78,18 +74,14 @@ def create_table(request):
 
 @require_POST
 def delete_product(request, pk):
-    denied = _role_denied(request, 'admin', 'boshliq')
-    if denied:
-        return denied
+ 
     product = get_object_or_404(Product, pk=pk)
     product.delete()
     return redirect('table_page')
 
 
 def edit_product(request, pk):
-    denied = _role_denied(request, 'admin', 'boshliq')
-    if denied:
-        return denied
+  
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
         form = editProductForm(request.POST, request.FILES, instance=product)
@@ -135,9 +127,7 @@ def create_user(request):
 
 
 def admins(request):
-    denied = _role_denied(request, 'boshliq', 'admin')
-    if denied:
-        return denied
+   
     profile = getattr(request.user, 'userprofile', None)
     context = {
         'admin_soni': UserProfile.objects.filter(role='admin').count(),
@@ -151,9 +141,7 @@ def admins(request):
 
 
 def hisobot(request):
-    denied = _role_denied(request, 'boshliq', 'admin')
-    if denied:
-        return denied
+   
     context = {
         'product_soni': Product.objects.count(),
         'admin_soni': UserProfile.objects.filter(role='admin').count(),
@@ -164,16 +152,12 @@ def hisobot(request):
 
 
 def foydalanuvchilar(request):
-    denied = _role_denied(request, 'boshliq', 'admin')
-    if denied:
-        return denied
+   
     return render(request, 'boshliq/users.html')
 
 
 def boshliq_page(request):
-    denied = _role_denied(request, 'boshliq', 'admin')
-    if denied:
-        return denied
+   
     return render(request, 'boshliq/home.html')
 
 
@@ -198,9 +182,7 @@ def delete_user(request, pk):
 
 
 def seller_page(request):
-    denied = _role_denied(request, 'sotuvchi')
-    if denied:
-        return denied
+   
 
     if request.method == 'POST':
         form = ProductRequestForm(request.POST, request.FILES)
@@ -220,17 +202,13 @@ def seller_page(request):
 
 
 def product_requests(request):
-    denied = _role_denied(request, 'admin', 'boshliq')
-    if denied:
-        return denied
+ 
     requests = ProductRequest.objects.select_related('user').order_by('-id')
     return render(request, 'admin/admin_requests.html', {'requests': requests})
 
 
 def _update_request_status(request, pk, status_value, comment=''):
-    denied = _role_denied(request, 'admin', 'boshliq')
-    if denied:
-        return denied
+   
 
     product_request = get_object_or_404(ProductRequest, pk=pk)
     system, _ = ProductRequestSystem.objects.get_or_create(
