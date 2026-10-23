@@ -51,10 +51,7 @@
                         <td>
                           
                           <a href="{% url 'edit_user' user.pk %}" class="btn btn-info">Tahrirlash</a>
-                          <form method="post" action="{% url 'delete_user' user.pk %}" style="display:inline-block;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">O'chirish</button>
-                          </form>
+                          <a href="{% url 'delete_user' user.pk %}" class="btn btn-danger">O'chirish</a>
                         </td>
                         </td>
                      
